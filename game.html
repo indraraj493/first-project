@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#grad1 {
+  height: 100%;
+  width:100%;
+  background-color: red;
+  background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+#for{
+color:green;
+float:left;
+padding-top:-5px;}
+#for1{
+color:green;
+float:right;
+text-align:right;
+padding-top:10px;
+margin-top:20px;
+margin-right:20px;
+}
+/*#p{
+color:green;
+float:right;
+text-align:right;
+margin-right:20px;
+}*/
+#for2{
+color:green;
+text-align:left;
+padding-top:0px;
+margin-top:-20px;
+}
+table {
+  width:80%;
+  background-color:gray;
+ 
+  
+}
+table, th, td {
+  
+  ceiling-space:5px;
+}
+#p{
+color:red;
+float:right;}
+th, td {
+  padding: 15px;
+  text-align: left;
+  hight:350px;
+  width:15px;
+  background-color:black;
+  color:green;
+  text-align:center;
+}
+#countdown{
+padding-top:10px;
+text-align:center;}
+#sw-go{
+margin-top:60px;
+margin-left:180px;
+color:green;}
+#stopwatch{
+float:left;
+margin-top:70px;
+margin-left:-70px;
+color:green;}
+#your{
+float:left;
+margin-top:-8px;
+margin-left:110px;
+color:red;
+font-size:25px;}
+#sw-time{
+margin-top:10px;
+margin-left:200px;
+color:green;}
+#sw-rst{
+margin-left:170px;
+margin-top:60px;}
+@media(max-width:760)
+{
+*{width:100%;
+}
+#container1{
+width:100%;
+hight:auto;}
+#container2{
+width:100%;
+hight:auto;}
+#container3{
+width:100%;
+hight:auto;}}
+</style>
+<script>
+status=0;
+time=0;
+//var score[5]=[];
+var sw = {
+  etime : null, 
+  erst : null, 
+  ego : null,
+  timer : null, 
+  now : 0, 
+  init : function () {
+ 
+    sw.etime = document.getElementById("sw-time");
+    sw.erst = document.getElementById("sw-rst");
+    sw.ego = document.getElementById("sw-go");
+
+ 
+    sw.erst.addEventListener("click", sw.reset);
+    sw.erst.disabled = false;
+    sw.ego.addEventListener("click", sw.start);
+    sw.ego.disabled = false;
+  },
+
+  /* [ACTIONS] */
+  tick : function () {
+    if((res===20 && status===0) || (res===30 && status===1) ||(res===40 && status===2))
+   { var x9=document.getElementById('for2');
+    x9.innerHTML+=':'+ time;
+    res=0;status=0;
+       if (sw.timer !== null) { sw.stop(); 
+    }
+    sw.now= -2;
+    time=-1;
+    sw.tick();
+}
+    sw.now++;
+    time++;
+    var remain = sw.now;
+    var hours = Math.floor(remain / 3600);
+    remain -= hours * 3600;
+    var mins = Math.floor(remain / 60);
+    remain -= mins * 60;
+    var secs = remain;
+
+    if (hours<10) { hours = "0" + hours; }
+    if (mins<10) { mins = "0" + mins; }
+    if (secs<10) { secs = "0" + secs; }
+    sw.etime.innerHTML = hours + ":" + mins + ":" + secs;
+  },
+
+  start : function () {
+
+    sw.timer = setInterval(sw.tick, 1000);
+    sw.ego.value = "Stop";
+    sw.ego.removeEventListener("click", sw.start);
+    sw.ego.addEventListener("click", sw.stop);
+  },
+
+  stop  : function () {
+    clearInterval(sw.timer);
+    sw.timer = null;
+    sw.ego.value = "Start";
+    sw.ego.removeEventListener("click", sw.stop);
+    sw.ego.addEventListener("click", sw.start);
+  },
+
+  reset : function () {
+    if (sw.timer != null) { sw.stop(); 
+    }
+    sw.now = -1;
+    time=-1;
+    sw.tick();
+  }
+};
+
+window.addEventListener("load", sw.init)
+var res=0;
+
+function find(count,r){
+count=Number(count);
+r=Number(r);
+status=r;
+if(res === count-1){
+res++;
+if(r===0)
+s='a';
+else if(r===1)
+s='b';
+else s='c';
+
+s+=count;
+var z=document.getElementById(s);
+z.innerHTML='';
+}
+else return;
+}
+/*function feed(){
+    var x1=document.getElementById('a12').innerHTML;
+    x1.addEventListener("click", find(12));
+     var x2=document.getElementById('a4').innerHTML;
+     x2.addEventListener("click", find(4));
+      var x3=document.getElementById('a8').innerHTML;
+      x3.addEventListener("click", find(8));
+      var x4= document.getElementById('a19').innerHTML;
+      x4.addEventListener("click", find(19));
+       var x5=document.getElementById('a14').innerHTML;
+       x5.addEventListener("click", find(14));
+           var x6=document.getElementById('a3').innerHTML;
+           x6.addEventListener("click", find(3));
+     var x7=document.getElementById('a1').innerHTML;
+     x7.addEventListener("click", find(1));
+     var x8= document.getElementById('a2').innerHTML;
+     x8.addEventListener("click", find(2));
+      var x9= document.getElementById('a6').innerHTML;
+      x9.addEventListener("click", find(6));
+       var x10= document.getElementById('a5').innerHTML;
+       x10.addEventListener("click", find(5));
+           var x11=document.getElementById('a7').innerHTML;
+           x11.addEventListener("click", find(7));
+     var x12=document.getElementById('a9').innerHTML;x12.addEventListener("click", find(9));
+     var x13= document.getElementById('a10').innerHTML;
+     x13.addEventListener("click", find(10));
+      var x14 document.getElementById('a11').innerHTML;
+       x14.addEventListener("click", find(11));
+        var x15=document.getElementById('a13').innerHTML;
+        x15.addEventListener("click", find(13));
+          var x16=  document.getElementById('a15').innerHTML;
+           x16.addEventListener("click", find(15));
+    var x17= document.getElementById('a16').innerHTML;
+     x17.addEventListener("click", find(16));
+     var x18= document.getElementById('a17').innerHTML;
+      x18.addEventListener("click", find(17));
+       var x19=document.getElementById('a18').innerHTML;
+       x19.addEventListener("click", find(18));
+        var x20=document.getElementById('a20').innerHTML;
+        x20.addEventListener("click", find(20));
+}*/
+function fa(count){
+var x1= document.getElementById("container1");
+var x2 = document.getElementById("container2");
+var x3= document.getElementById("container3");
+if(count===0){
+x1.style.display='block';
+x2.style.display="none";
+x3.style.display="none";
+}
+else if(count===1){
+x2.style.display='block';
+x1.style.display="none";
+x3.style.display="none";
+}
+else{
+x3.style.display='block';
+x2.style.display="none";
+x1.style.display="none";
+}
+}</script>
+
+</head>
+<body>
+<div id="grad1" style="text-align:center;margin:auto;color:#888888;font-size:40px;font-weight:bold">
+<p>Choose your level:</p>
+<p># level is based on diffculty</p>&nbsp&nbsp&nbsp&nbsp
+ <button id="easy" onClick="fa(0)">level 1</button>&nbsp&nbsp&nbsp&nbsp
+ <button id="medium" onClick="fa(1)">level 2</button>&nbsp&nbsp&nbsp&nbsp
+ <button id="hard" onClick="fa(2)">level 3</button>&nbsp&nbsp&nbsp&nbsp
+ <br>
+ <br>
+ <audio controls>
+	<source src="/assets_tutorials/media/Loreena_Mckennitt_Snow_56bit.mp3" type="audio/mpeg">
+	<source src="/assets_tutorials/media/Loreena_Mckennitt_Snow_56bit.ogg" type="audio/ogg">
+	Your browser does not support the audio tag.
+</audio>
+  <div id="stopwatch">
+      <input type="button" value="Reset" id="sw-rst" disabled/>
+      
+    </div>
+    <div id="sw-time">00:00:00</div>
+    <input type="button" value=" Game Start" id="sw-go" disabled/><br>
+    <br><br>
+<h2 id="for2">Total time</h2>
+<span id='p'></span>
+<h2 id="for">click the numbers as quickly as you can</h2>
+<div id='container1'>
+<table>
+  <tr>
+    <th id='a12' onclick="find(12,0)">12</th>
+    <th id='a4' onclick="find(4,0)">4</th> 
+    <th id='a8' onclick="find(8,0)">8</th>
+    <th id='a19' onclick="find(19,0)">19</th>
+    <th id='a14' onclick="find(14,0)">14</th>
+  </tr>
+  <tr>
+    <td id='a2' onclick="find(2,0)">2</td>
+    <td id='a9' onclick="find(9,0)">9</td>
+    <td id='a11' onclick="find(11,0)">11</td>
+    <td id='a15' onclick="find(15,0)">15</td>
+    <td id='a7'onclick="find(7,0)">7</td>
+  </tr>
+  <tr>
+    <td id='a20' onclick="find(20,0)">20</td>
+    <td id='a1' onclick="find(1,0)">1</td>
+    <td id='a17' onclick="find(17,0)">17</td>
+    <td id='a13' onclick="find(13,0)">13</td>
+    <td id='a6' onclick="find(6,0)">6</td>
+  </tr>
+  <tr>
+    <td id='a5' onclick="find(5,0)">5</td>
+    <td id='a16' onclick="find(16,0)">16</td>
+    <td id='a3' onclick="find(3,0)">3</td>
+    <td id='a10'onclick="find(10,0)">10</td>
+    <td id='a18' onclick="find(18,0)">18</td>
+  </tr>
+</table>
+</div>
+<br>
+<br>
+<br>
+<div id='container2'>
+<table>
+  <tr>
+    <th id='b30' onclick="find(30,1)">30</th>
+    <th id='b7' onclick="find(7,1)">7</th> 
+    <th id='b13' onclick="find(13,1)">13</th>
+    <th id='b24' onclick="find(24,1)">24</th>
+    <th id='b10' onclick="find(10,1)">10</th>
+  </tr>
+  <tr>
+    <td id='b17' onclick="find(17,1)">17</td>
+    <td id='b28' onclick="find(28,1)">28</td>
+    <td id='b4' onclick="find(4,1)">4</td>
+    <td id='b19' onclick="find(19,1)">19</td>
+    <td id='b16'onclick="find(16,1)">16</td>
+  </tr>
+  <tr>
+    <td id='b21' onclick="find(21,1)">21</td>
+    <td id='b26' onclick="find(26,1)">26</td>
+    <td id='b29' onclick="find(29,1)">29</td>
+    <td id='b22' onclick="find(22,1)">22</td>
+    <td id='b2' onclick="find(2,1)">2</td>
+  </tr>
+  <tr>
+    <td id='b3' onclick="find(3,1)">3</td>
+    <td id='b9'  onclick="find(9,1)">9</td>
+    <td id='b5' onclick="find(5,1)">5</td>
+    <td id='b11'onclick="find(11,1)">11</td>
+    <td id='b23' onclick="find(23,1)">23</td>
+  </tr>
+  <tr>
+    <td id='b27' onclick="find(27,1)">27</td>
+    <td id='b14'  onclick="find(14,1)">14</td>
+    <td id='b18' onclick="find(18,1)">18</td>
+    <td id='b25'onclick="find(25,1)">25</td>
+    <td id='b20' onclick="find(20,1)">20</td>
+  </tr>
+  <tr>
+    <td id='b8' onclick="find(8,1)">8</td>
+    <td id='b12'  onclick="find(12,1)">12</td>
+    <td id='b1' onclick="find(1,1)">1</td>
+    <td id='b15'onclick="find(15,1)">15</td>
+    <td id='b6' onclick="find(6,1)">6</td>
+  </tr>
+</table>
+</div><br>
+<br><br>
+<div id='container3'>
+<table>
+  <tr>
+    <th id='c18' onclick="find(18,2)">18</th>
+    <th id='c22' onclick="find(22,2)">22</th> 
+    <th id='c6' onclick="find(6,2)">6</th>
+    <th id='c11' onclick="find(11,2)">11</th>
+    <th id='c14' onclick="find(14,2)">14</th>
+  </tr>
+  <tr>
+    <td id='c32' onclick="find(32,2)">32</td>
+    <td id='c19' onclick="find(19,2)">19</td>
+    <td id='c30' onclick="find(30,2)">30</td>
+    <td id='c38' onclick="find(38,2)">38</td>
+    <td id='c3'onclick="find(3,2)">3</td>
+  </tr>
+  <tr>
+    <td id='c4' onclick="find(4,2)">4</td>
+    <td id='c24' onclick="find(24,2)">24</td>
+    <td id='c36' onclick="find(36,2)">36</td>
+    <td id='c26' onclick="find(26,2)">26</td>
+    <td id='c34' onclick="find(34,2)">34</td>
+  </tr>
+  <tr>
+    <td id='c21' onclick="find(21,2)">21</td>
+    <td id='c31'  onclick="find(31,2)">31</td>
+    <td id='c15' onclick="find(15,2)">15</td>
+    <td id='c8'onclick="find(8,2)">8</td>
+    <td id='c25' onclick="find(25,2)">25</td>
+  </tr>
+  <tr>
+    <td id='c12' onclick="find(12,2)">12</td>
+    <td id='c10'  onclick="find(10,2)">10</td>
+    <td id='c1' onclick="find(1,2)">1</td>
+    <td id='c29'onclick="find(29,2)">29</td>
+    <td id='c17' onclick="find(17,2)">17</td>
+  </tr>
+  <tr>
+    <td id='c28' onclick="find(28,2)">28</td>
+    <td id='c39'  onclick="find(39,2)">39</td>
+    <td id='c20' onclick="find(20,2)">20</td>
+    <td id='c33'onclick="find(33,2)">33</td>
+    <td id='c5' onclick="find(5,2)">5</td>
+  </tr>
+  <tr>
+    <td id='c7' onclick="find(7,2)">7</td>
+    <td id='c27'  onclick="find(27,2)">27</td>
+    <td id='c37' onclick="find(37,2)">37</td>
+    <td id='c9'onclick="find(9,2)">9</td>
+    <td id='c35' onclick="find(35,2)">35</td>
+  </tr>
+  <tr>
+    <td id='c40' onclick="find(40,2)">40</td>
+    <td id='c2'  onclick="find(2,2)">2</td>
+    <td id='c23' onclick="find(23,2)">23</td>
+    <td id='c16'onclick="find(16,2)">16</td>
+    <td id='c13' onclick="find(13,2)">13</td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
